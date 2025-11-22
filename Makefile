@@ -2,10 +2,14 @@
 
 
 build:
-	@gcc main.c -o same
+	@gcc src/main.c -o bin/same
+	@gcc -c -fPIC src/lib.c -o libsame.o
+	@gcc -shared libsame.o -o bin/libsame.so 
 
 clean:
-	@rm ./same
+	@rm -rf bin
 
 install:
-	@mv ./same /usr/bin/same	
+	@mv bin/same /usr/bin/same
+	@mv bin/libsame.so /usr/lib/libsame.so
+	mv src/same.h /usr/include/same.h
